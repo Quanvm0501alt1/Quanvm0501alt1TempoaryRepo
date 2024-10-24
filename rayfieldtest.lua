@@ -43,8 +43,14 @@ Rayfield:Notify({
 })
 
 local main = function()
-   local Tab = Window:CreateTab("Tab Main", 4483362458)
-   local Tab = Window:CreateTab("Tab Config", 4483362458)
+   local Main = Window:CreateTab("Tab Main", 4483362458)
+   local Config = Window:CreateTab("Tab Config", 112137803832061)
+   local Button = Tab:CreateButton({
+	Name = "Button Example",
+	Callback = function()
+	-- The function that takes place when the button is pressed
+	end,
+ })
 end
 main()
 Rayfield:LoadConfiguration()
