@@ -33,7 +33,7 @@ Rayfield:Notify({
    Image = 4483362458,
    Actions = { -- Notification Buttons
       Ignore = {
-         Name = "Loaded!",
+         Name = "Close",
          Callback = function()
          print("Script loaded!")
       end
