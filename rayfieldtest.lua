@@ -42,8 +42,8 @@ Rayfield:Notify({
 })
 
 local main = function()
-   local Tab = Window:CreateTab("Tab Example", 4483362458)
-   local Tab = Window:CreateTab("Tab Example", 4483362458)
+   local Tab = Window:CreateTab("Tab Main", 4483362458)
+   local Tab = Window:CreateTab("Tab Config", 4483362458)
 end
 main()
 Rayfield:LoadConfiguration()
