@@ -41,6 +41,9 @@ Rayfield:Notify({
 },
 })
 
-local Tab = Window:CreateTab("Tab Example", 4483362458) -- Title, Image
-
+local main = function() {
+   local Tab = Window:CreateTab("Tab Example", 4483362458)
+   local Tab = Window:CreateTab("Tab Example", 4483362458)
+}
+main()
 Rayfield:LoadConfiguration()
