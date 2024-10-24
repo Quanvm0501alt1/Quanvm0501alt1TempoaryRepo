@@ -1,5 +1,6 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 -- getgenv().SecureMode = true
+local player = game.Players.LocalPlayer
 local Window = Rayfield:CreateWindow({
    Name = "Test Example Window",
    LoadingTitle = "Test Interface Suite",
