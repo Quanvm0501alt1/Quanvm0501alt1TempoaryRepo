@@ -42,15 +42,30 @@ Rayfield:Notify({
 },
 })
 
-local main = function()
-   local Main = Window:CreateTab("Tab Main", 4483362458)
-   local Config = Window:CreateTab("Tab Config", 112137803832061)
-   local Button = Tab:CreateButton({
+function Notify(title, content)
+	Rayfield:Notify({
+	   Title = title,
+	   Content = content,
+	   Duration = 6.5,
+	   Image = 4483362458,
+	   Actions = { -- Notification Buttons
+	      Ignore = {
+	         Name = "Close",
+	         Callback = function()
+	         print("Script loaded!")
+	      end
+	   },
+	},
+	})
+end
+
+local Main = Window:CreateTab("Tab Main", 4483362458)
+local Config = Window:CreateTab("Tab Config", 112137803832061)
+local Button = Tab:CreateButton({
 	Name = "Button Example",
 	Callback = function()
-	-- The function that takes place when the button is pressed
+	Notify()
 	end,
- })
-end
-main()
+})
+
 Rayfield:LoadConfiguration()
