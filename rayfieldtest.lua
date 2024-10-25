@@ -37,7 +37,7 @@ Rayfield:Notify({
         Ignore = {
             Name = "Close",
             Callback = function()
-                print("Script loaded!")
+                print(content)
             end
         },
     },
