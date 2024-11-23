@@ -54,7 +54,7 @@ local ThemeChooseDropDown = Local:CreateDropdown({
    Options = {"Default","Amber Glow", "Amethyst", "Bloom", "Dark Blue", "Green", "Light", "Ocean", "Serenity"},
    CurrentOption = {"Default"},
    MultipleOptions = false,
-   Flag = "ThemeChooseDropDown1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Flag = "ThemeChooseDropDown1",
    Callback = function(Options)
     if (Options[1] == "Amber Glow") then
         Window.ModifyTheme('AmberGlow')
@@ -63,6 +63,15 @@ local ThemeChooseDropDown = Local:CreateDropdown({
     else
         Window.ModifyTheme(Options[1])
     end
+   end,
+})
+
+local Divider1 = Local:CreateDivider()
+
+local InfYieldbtn1 = Local:CreateButton({
+   Name = "Launch Infinte Yield",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
    end,
 })
 
