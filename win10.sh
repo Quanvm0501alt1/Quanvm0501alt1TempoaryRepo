@@ -1,12 +1,10 @@
 #!/bin/bash
 
-# --- Script to detect Linux distribution and run appropriate Windows 10 VM setup ---
-# --- Tập lệnh để phát hiện bản phân phối Linux và chạy thiết lập máy ảo Windows 10 phù hợp ---
-
+# (Keep your existing URL variables and SETUP_SCRIPT_NAME here)
 WIN10_UBUNTU_SCRIPT_URL="https://raw.githubusercontent.com/Quanvm0501alt1/Quanvm0501alt1TempoaryRepo/refs/heads/main/win10-ubuntu.sh"
 WIN10_ARCH_SCRIPT_URL="https://raw.githubusercontent.com/Quanvm0501alt1/Quanvm0501alt1TempoaryRepo/refs/heads/main/win10-arch.sh"
 
-SETUP_SCRIPT_NAME="win10_docker_setup.sh"
+SETUP_SCRIPT_NAME="win10_docker_setup_temp.sh" # Using a temp name to avoid conflicts
 
 echo "==================================================================="
 echo "Starting OS detection for Windows 10 VM setup..."
@@ -20,10 +18,18 @@ echo "--- Bước 1: Phát hiện bản phân phối Linux ---"
 
 DISTRO=""
 if [ -f /etc/os-release ]; then
-    . /etc/os-release
-    if [[ "$ID" == "ubuntu" || "$ID" == "debian" ]]; then
+    # Read /etc/os-release securely to avoid sourcing issues
+    # Đọc /etc/os-release một cách an toàn để tránh các vấn đề về nguồn
+    ID_LIKE=$(grep '^ID_LIKE=' /etc/os-release | cut -d'=' -f2 | tr -d '"')
+    ID_OS=$(grep '^ID=' /etc/os-release | cut -d'=' -f2 | tr -d '"')
+
+    # Check for Ubuntu/Debian based systems
+    # Kiểm tra các hệ thống dựa trên Ubuntu/Debian
+    if [[ "$ID_OS" == "ubuntu" || "$ID_OS" == "debian" || "$ID_LIKE" == *"debian"* || "$ID_LIKE" == *"ubuntu"* ]]; then
         DISTRO="ubuntu_debian"
-    elif [[ "$ID" == "arch" ]]; then
+    # Check for Arch Linux based systems
+    # Kiểm tra các hệ thống dựa trên Arch Linux
+    elif [[ "$ID_OS" == "arch" || "$ID_LIKE" == *"arch"* ]]; then
         DISTRO="arch"
     fi
 fi
@@ -42,7 +48,7 @@ echo ""
 
 # --- Step 2: Download the appropriate setup script ---
 echo "--- Step 2: Downloading the appropriate setup script ---"
-echo "--- Bước 2: Tải xuống tập lệnh thiết lập phù hợp ---"
+echo "--- Bước 2: Đang tải xuống tập lệnh thiết lập phù hợp ---"
 
 DOWNLOAD_URL=""
 case "$DISTRO" in
