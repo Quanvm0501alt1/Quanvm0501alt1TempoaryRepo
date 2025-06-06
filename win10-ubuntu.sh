@@ -75,10 +75,30 @@ echo "File 'win10.yml' created successfully."
 echo "Tệp 'win10.yml' đã được tạo thành công."
 echo ""
 
-# --- Step 6: Start Windows 10 container using Docker Compose ---
+# --- Step 6: Start Windows 10 container using Docker Compose (try modern, then old) ---
 echo "--- Step 6: Starting Windows 10 container in detached mode ---"
 echo "--- Bước 6: Khởi động vùng chứa Windows 10 ở chế độ nền ---"
+
+# Try the modern 'docker compose' syntax first
+echo "Attempting to start container with 'docker compose' (modern syntax)..."
 sudo docker compose -f win10.yml up -d
+if [ $? -eq 0 ]; then
+  echo "Successfully started container with 'docker compose'."
+  echo "Đã khởi động vùng chứa thành công bằng 'docker compose'."
+else
+  echo "Failed to start with 'docker compose'. Falling back to 'docker-compose' (legacy syntax)..."
+  echo "Không thể khởi động bằng 'docker compose'. Đang chuyển sang 'docker-compose' (cú pháp cũ)..."
+  sudo docker-compose -f win10.yml up -d
+  if [ $? -eq 0 ]; then
+    echo "Successfully started container with 'docker-compose'."
+    echo "Đã khởi động vùng chứa thành công bằng 'docker-compose'."
+  else
+    echo "Failed to start container with both 'docker compose' and 'docker-compose'. Please check your Docker installation."
+    echo "Không thể khởi động vùng chứa bằng cả 'docker compose' và 'docker-compose'. Vui lòng kiểm tra cài đặt Docker của bạn."
+    exit 1
+  fi
+fi
+
 echo "Windows 10 container is now starting in the background."
 echo "Vùng chứa Windows 10 hiện đang khởi động ở chế độ nền."
 echo ""
